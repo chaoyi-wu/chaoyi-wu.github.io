@@ -1,0 +1,396 @@
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <!--
+  <script src="./resources/jsapi" type="text/javascript"></script>
+  <script type="text/javascript" async>google.load("jquery", "1.3.2");</script>
+ -->
+
+<style type="text/css">
+  @font-face {
+   font-family: 'Avenir Book';
+   src: url("./fonts/Avenir_Book.ttf"); /* File to be stored at your site */
+   }
+
+  body {
+    font-family: "Avenir Book", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-weight:300;
+    font-size:14px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 800px;
+  }
+  h1 {
+    font-weight:300;
+  }
+  h2 {
+    font-weight:300;
+  }
+
+  p {
+    font-weight:300;
+    line-height: 1.4;
+  }
+
+  code {
+    font-size: 0.8rem;
+    margin: 0 0.2rem;
+    padding: 0.5rem 0.8rem;
+    white-space: nowrap;
+    background: #efefef;
+    border: 1px solid #d3d3d3;
+    color: #000000;
+    border-radius: 3px;
+  }
+
+  pre > code {
+    display: block;
+    white-space: pre;
+    line-height: 1.5;
+    padding: 0;
+    margin: 0;
+  }
+
+  pre.prettyprint > code {
+    border: none;
+  }
+
+
+  .container {
+        display: flex;
+        align-items: center;
+        justify-content: center
+  }
+  .image {
+        flex-basis: 40%
+  }
+  .text {
+        padding-left: 20px;
+        padding-right: 20px;
+  }
+
+  .disclaimerbox {
+    background-color: #eee;
+    border: 1px solid #eeeeee;
+    border-radius: 10px ;
+    -moz-border-radius: 10px ;
+    -webkit-border-radius: 10px ;
+    padding: 20px;
+  }
+
+  video.header-vid {
+    height: 140px;
+    border: 1px solid black;
+    border-radius: 10px ;
+    -moz-border-radius: 10px ;
+    -webkit-border-radius: 10px ;
+  }
+
+  img.header-img {
+    height: 140px;
+    border: 1px solid black;
+    border-radius: 10px ;
+    -moz-border-radius: 10px ;
+    -webkit-border-radius: 10px ;
+  }
+
+  img.rounded {
+    border: 0px solid #eeeeee;
+    border-radius: 10px ;
+    -moz-border-radius: 10px ;
+    -webkit-border-radius: 10px ;
+
+  }
+
+  a:link,a:visited
+  {
+    color: #1367a7;
+    text-decoration: none;
+  }
+  a:hover {
+    color: #208799;
+  }
+
+  td.dl-link {
+    height: 160px;
+    text-align: center;
+    font-size: 22px;
+  }
+
+  .layered-paper-big { /* modified from: http://css-tricks.com/snippets/css/layered-paper/ */
+    box-shadow:
+            0px 0px 1px 1px rgba(0,0,0,0.35), /* The top layer shadow */
+            5px 5px 0 0px #fff, /* The second layer */
+            5px 5px 1px 1px rgba(0,0,0,0.35), /* The second layer shadow */
+            10px 10px 0 0px #fff, /* The third layer */
+            10px 10px 1px 1px rgba(0,0,0,0.35), /* The third layer shadow */
+            15px 15px 0 0px #fff, /* The fourth layer */
+            15px 15px 1px 1px rgba(0,0,0,0.35), /* The fourth layer shadow */
+            20px 20px 0 0px #fff, /* The fifth layer */
+            20px 20px 1px 1px rgba(0,0,0,0.35), /* The fifth layer shadow */
+            25px 25px 0 0px #fff, /* The fifth layer */
+            25px 25px 1px 1px rgba(0,0,0,0.35); /* The fifth layer shadow */
+    margin-left: 10px;
+    margin-right: 45px;
+  }
+
+
+  .layered-paper { /* modified from: http://css-tricks.com/snippets/css/layered-paper/ */
+    box-shadow:
+            0px 0px 1px 1px rgba(0,0,0,0.35), /* The top layer shadow */
+            5px 5px 0 0px #fff, /* The second layer */
+            5px 5px 1px 1px rgba(0,0,0,0.35), /* The second layer shadow */
+            10px 10px 0 0px #fff, /* The third layer */
+            10px 10px 1px 1px rgba(0,0,0,0.35); /* The third layer shadow */
+    margin-top: 5px;
+    margin-left: 10px;
+    margin-right: 30px;
+    margin-bottom: 5px;
+  }
+
+  .vert-cent {
+    position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+  }
+
+  hr
+  {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+  }
+</style>
+
+	<title>MedKLIP: Medical Knowledge Enhanced Language-Image Pre-Training</title>
+</head>
+
+<body>
+	<br>
+	<center>
+	<span style="font-size:36px">MedKLIP: Medical Knowledge Enhanced Language-Image Pre-Training</span><br><br><br>
+	</center>
+	<table align="center" width="800px">
+            <tbody><tr>
+                    <td align="center" width="160px">
+              <center>
+                <span style="font-size:16px"><a href="https://chaoyi-wu.github.io/">Chaoyi Wu</a><sup>1 2</sup></span>
+                </center>
+                </td>
+                    <td align="center" width="160px">
+              <center>
+                <span style="font-size:16px"><a href="https://xiaoman-zhang.github.io/">Xiaoman Zhang</a><sup>1 2</sup></span>
+                </center>
+                </td>
+                    <td align="center" width="160px">
+              
+              
+	      <center>
+                <span style="font-size:16px"><a href="https://mediabrain.sjtu.edu.cn/">Yanfeng Wang</a><sup>1 2</sup></span>
+                </center>
+              </td>
+              <td align="center" width="160px">
+        <center>
+                <span style="font-size:16px"><a href="https://weidixie.github.io/">Weidi Xie</a><sup>1 2</sup></span>
+        </center>
+		</td>
+                    <td align="center" width="160px">	    
+              <center>
+                <span style="font-size:16px"><a href="https://mediabrain.sjtu.edu.cn/yazhang/">Ya Zhang</a><sup>1 2</sup></span>
+                </center>
+            </tr>
+
+        </tbody></table><br>
+	
+	  <table align="center" width="700px">
+            <tbody><tr>
+                    <td align="center" width="50px">
+              <center>
+                    <span style="font-size:16px"></span>
+                </center>
+                </td>
+                    <td align="center" width="300px">
+              <center>
+                    <span style="font-size:16px"><sup>1</sup>CMIC, Shanghai Jiao Tong University</span>
+                </center>
+                </td>
+                    <td align="center" width="300px">
+              <center>
+                    <span style="font-size:16px"><sup>2</sup>Shanghai AI Lab</span>
+                </center>
+                </td>
+        </tr></tbody></table>
+	
+	<table align="center" width="700px">
+            <tbody><tr>
+              <td align="center" width="200px">
+                <center>
+                  <br>
+                  <span style="font-size:20px">Code
+                    <a href="https://github.com/chaoyi-wu/MedKLIP"> [GitHub]</a>
+                  </span>
+                </center>
+              </td>
+
+              <!-- <td align="center" width="200px">
+                <center>
+                  <br>
+                  <span style="font-size:20px">
+                    Paper <a href="https://arxiv.org/pdf/2109.03230.pdf"> [arXiv]</a>
+                  </span>
+                </center>
+              </td> -->
+
+              <td align="center" width="200px">
+                <center>
+                  <br>
+                  <span style="font-size:20px">
+                    Cite <a href="./cite.txt"> [BibTeX]</a>
+                  </span>
+                </center>
+              </td>
+            </tr></tbody>
+      </table>
+	
+      <br><hr>
+      <!-- <center><h2> Abstract </h2> </center>
+      <p style="text-align:justify; text-justify:inter-ideograph;">
+      <left>
+        In this paper, we consider the problem of enhancing self-supervised visual-language pre-training~(VLP) with medical-specific knowledge, 
+        by exploiting the paired image-text reports from the radiological daily practice.
+        In particular, we make the following contributions:
+        <i>First</i>, unlike existing works that directly process the raw reports,
+        we adopt a novel report pre-processing mechanism by simply extracting the useful medical entities, avoiding unnecessary complexity from understanding the language grammar;
+        <i>Second</i>, we propose a novel entity embedding module by querying an external knowledge description base, to exploit the rich context of additional information that the medical domain affords, and implicitly build relationships between entities in the language embedding space;
+        <i> Third</i>, we propose a novel Transformer-based fusion model for spatially aligning the entity description with visual signals at the image patch level only with self-supervised learning, thus enabling the ability for spatial grounding;
+        <i> Fourth</i>, we conduct thorough experiments to validate the effectiveness of our proposed architecture, and benchmark on numerous public benchmarks {\em e.g.}, ChestX-ray14, 
+        RSNA Pneumonia, SIIM-ACR Pneumothorax, COVIDx CXR-2, COVID Rural, and EdemaSeverity. 
+        In both zero-shot and fine-tuning settings, our model has demonstrated strong performance compared with the former methods on disease classification and grounding.
+      </center></p>
+      <p><img class="center"  src="./resources/Method.png" width="800px"></p> -->
+
+      <center><h2> Abstract </h2> </center>
+      <p style="text-align:justify; text-justify:inter-ideograph;">
+      <div class="container">
+        <div class="text" width="400px"> 
+          <p style="text-align:justify; text-justify:inter-ideograph;">
+            <left>
+              In this paper, we consider the problem of enhancing self-supervised visual-language pre-training (VLP) with medical-specific knowledge, 
+              by exploiting the paired image-text reports from the radiological daily practice.
+              In particular, we make the following contributions:
+              <i>First</i>, unlike existing works that directly process the raw reports,
+              we adopt a novel report pre-processing mechanism by simply extracting the useful medical entities, avoiding unnecessary complexity from understanding the language grammar;
+              <i>Second</i>, we propose a novel entity embedding module by querying an external knowledge description base, to exploit the rich context of additional information that the medical domain affords, and implicitly build relationships between entities in the language embedding space;
+              <i> Third</i>, we propose a novel Transformer-based fusion model for spatially aligning the entity description with visual signals at the image patch level only with self-supervised learning, thus enabling the ability for spatial grounding;
+              <i> Fourth</i>, we conduct thorough experiments to validate the effectiveness of our proposed architecture, and benchmark on numerous public benchmarks, e.g., ChestX-ray14, 
+              RSNA Pneumonia, SIIM-ACR Pneumothorax, COVIDx CXR-2, COVID Rural, and EdemaSeverity. 
+              In both zero-shot and fine-tuning settings, our model has demonstrated strong performance compared with the former methods on disease classification and grounding.
+          </p>
+        </div>
+        <div class="image" width="400px">
+          <img style="width:400px" src='./resources/teaser.png'></img>
+        </div>
+      </div>
+      <br><hr>
+      <center> <h2> Architecture </h2> </center>
+      <p style="text-align:justify; text-justify:inter-ideograph;"><left>
+        The whole framework of our method. 
+        The figure mainly contains fourth module: <i>Visual Encoder</i>, <i>Knowledge-enhanced Language  Encoding</i>, <i>Fusion Module</i>. 
+        <i>Knowledge-enhanced Language Encoding</i> contains <i>Text Encoder</i> and <i>Report Filter</i>. 
+        <i>Report Filter</i> extracts entities from the raw reports and <i>Text Encoder</i> further embeds them. 
+        <i>Visual Encoder</i> is used to encoder the input of visual modalities and <i>Fusion Module</i> are used for cross-modality interaction. 
+        The details of <i>Report Filter</i> can be found in the right sub-figure. A report is first filtered by a pre-trained filter and viewed as a set of triplets. 
+        The <i>``Position''</i> part mixed with some negative positions for contrastive loss and the <i>``Exist''</i> part is used for CE loss. 
+	</left></p>
+        <p><img class="left"  src="./resources/Method.png" width="800px"></p>
+      
+      <br>
+      <hr>
+      <center><h2>Quantitative Results</h2></center>
+      <p><b>R1: Zero-shot Classification </b> </p>
+      <p><left>
+        Comparison with other state-of-the-art methods on zero-shot classification task. AUC, F1 and ACC scores are reported. All diseases mentioned in table are seen during pre-training.
+      </left></p>
+      <p><img class="center"  src="./resources/table1.png" width="800px"></p>
+      
+      <div class="container">
+        <div class="image" width="550px">
+          <center><p><img class="center"  src="./resources/table2.png" width="500px"></p></center>
+	      </div>
+        <div class="text" width="250px"> 
+          <p> Comparison with other state-of-the-art methods on zero-shot unseen disease ``Covid-19'' classification task. 
+            AUC, F1 and ACC scores are reported. 
+            ``Direct covid-19'' refers to directly use ``Covid-19'' to construct the prompt sentence while ``Covid-19 Description'' refers to replace the name ``Covid-19'' with its medical description.
+          </p>
+        </div>
+      </div>
+      <div class="container">
+        <div class="image" width="550px">
+          <center><p><img class="center"  src="./resources/fig3.png" width="500px"></p></center>
+        </div>
+        <div class="text" width="250px"> 
+          <p> The radar figure of our method and other methods of 14 diseases on Chestx-ray14 datasets 
+            AUC scores are reported and, as shown, our method exceeds the previous state-of-the-art on most diseases.
+          </p>
+        </div>
+      </div> 
+      <p><b>R2: Zero-shot Grounding </b> </p>	
+      <p> Comparison with other state-of-the-art methods on zero-shot region grounding tasks. 
+        (a) shows the results on RSNA Pneumonia dataset. (b) shows the results on SIIM-ACR Pneumothorax dataset.  
+        The pneumothorax region tends to be thin and narrow and much more challenging for grounding, we thus only consider pointing game, recall and precision. 
+        Our method can achieve better performance on different metrics, especially on Pointing game score. 
+        ``ConVIRT'' as the basic method proposed earliest can not realize this function.
+          </p>
+			<img style="width:800px" src='./resources/table3.png'></img>
+			
+      <p> Comparison with other state-of-the-art methods on zero-shot unseen disease Covid-19 grounding task.  
+        ``Direct covid-19'' refers to directly use ``Covid-19'' to construct the prompt sentence while ``Covid-19 Description'' refers to replace the name ``Covid-19`` with its medical description. 
+        Our method can achieve better performance on different metrics.
+          </p>
+      <center><p><img class="center"  src="./resources/table4.png" width="750px"></p></center>
+        
+      <p><b>R3: Fine-tuning Classification</b></p>
+      <p> Comparison of AUC scores with other state-of-the-art methods on fine-tuning classification task. 
+        The macro average of AUC scores on 14 diseases are reported for ChestX-ray14 dataset.
+          </p>
+      <center><p><img class="center"  src="./resources/table5.png" width="800px"></p></center>
+      
+      <p> Comparison of Dice scores with other state-of-the-art methods on fine-tuning segmentation tasks. 
+        Three diseases are reported, for each disease, three data portions, 1%, 10%, 100% are adopted to show the performance change.
+          </p>
+      <center><p><img class="center"  src="./resources/table6.png" width="800px"></p></center>
+
+      <p><b>R3: Fine-tuning Grading (Fine-grained Classification)</b></p>
+      <p> Comparison with other state-of-the-art methods on fine-tuning edema severity grading muti-class classification task. 
+        AUC score is reported in the Table. 
+        ``0,1,2,3'' in table represents the severity level and final macro average scores are reported.
+          </p>
+      <center><p><img class="center"  src="./resources/table7.png" width="800px"></p></center>
+      
+      <p><b>R4: Ablation Study</b></p>
+      <p> Ablation study on zero-shot classification task. ``PosCL'' refers to the position contrastive loss and ``DE'' refers to the description encoder.AUC, F1 and ACC scores are reported. For ChestX-ray 14, the metrics all refer to the macro average on the 14 diseases.
+          </p>
+      <center><p><img class="center"  src="./resources/table8.png" width="800px"></p></center>
+      <p> Ablation study on zero-shot grounding tasks. (a) shows the results on RSNA Pneumonia dataset. (b) shows the results on SIIM-ACR Pneumothorax dataset.
+          </p>
+      <center><p><img class="center"  src="./resources/table9.png" width="800px"></p></center>
+      <br>
+      <hr>
+
+      <center><h2>Visualizations of Zero-shot Grounding </h2></center>
+      <!-- <p><b>2D Visualization </b> </p> -->
+      <p><left>
+        The visualization of zero-shot grounding results of our method. Each column represents the results on one disease and the left in it is the ground-truth and right is the heatmap predication of our model. The brighter the red on the figure, the more likely the model considering this region to be associated with abnormalities.
+      </left></p>
+      <p><img class="center"  src="./resources/Visualization.png" width="800px"></p>
+      <br>
+      <hr>
+      <center> <h2> Acknowledgements </h2> </center>
+      <p> 
+	      Based on a template by <a href="http://web.mit.edu/phillipi/">Phillip Isola</a> and <a href="http://richzhang.github.io/">Richard Zhang</a>.
+      </p>
+      <br>
+<br>
+</body>
+</html>
