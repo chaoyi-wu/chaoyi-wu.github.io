@@ -1,1 +1,6 @@
-@misc{}
+@article{wu2023k,
+  title={K-Diag: Knowledge-enhanced Disease Diagnosis in Radiographic Imaging},
+  author={Wu, Chaoyi and Zhang, Xiaoman and Wang, Yanfeng and Zhang, Ya and Xie, Weidi},
+  journal={arXiv preprint arXiv:2302.11557},
+  year={2023}
+}
