@@ -274,9 +274,6 @@
 
       <center><h2> Abstract </h2> </center>
       <p style="text-align:justify; text-justify:inter-ideograph;">
-      <div class="container">
-        <div class="text" width="400px"> 
-          <p style="text-align:justify; text-justify:inter-ideograph;">
             <left>
               In this paper, we consider the problem of disease diagnosis. 
               Unlike the conventional learning paradigm that treats labels independently, we propose a knowledge-enhanced framework, that enables training visual representation with the guidance of medical domain knowledge. 
@@ -285,104 +282,96 @@
               Second, while training the visual encoder, we keep the parameters of the knowledge encoder frozen and propose to learn a set of prompt vectors for efficient adaptation. 
               Third, we adopt a Transformer-based disease-query module for cross-model fusion, which naturally enables explainable diagnosis results via cross attention. 
               To validate the effectiveness of our proposed framework, we conduct thorough experiments on three x-ray imaging datasets across different anatomy structures, showing our model is able to exploit the implicit relations between diseases/findings, thus is beneficial to the commonly encountered problem in the medical domain, namely, long-tailed and zero-shot recognition, which conventional methods either struggle or completely fail to realize.
-          </p>
-        </div>
-        <div class="image" width="400px">
-          <img style="width:400px" src='./resources/teaser.png'></img>
-        </div>
+            </left></p>
+          <p><img style="width:800px" src='./resources/teaser.png'></p>
       </div>
       <br><hr>
       <center> <h2> Architecture </h2> </center>
       <p style="text-align:justify; text-justify:inter-ideograph;"><left>
-        The whole framework of our method. 
-        The figure mainly contains fourth module: <i>Visual Encoder</i>, <i>Knowledge-enhanced Language  Encoding</i>, <i>Fusion Module</i>. 
-        <i>Knowledge-enhanced Language Encoding</i> contains <i>Text Encoder</i> and <i>Report Filter</i>. 
-        <i>Report Filter</i> extracts entities from the raw reports and <i>Text Encoder</i> further embeds them. 
-        <i>Visual Encoder</i> is used to encoder the input of visual modalities and <i>Fusion Module</i> are used for cross-modality interaction. 
-        The details of <i>Report Filter</i> can be found in the right sub-figure. A report is first filtered by a pre-trained filter and viewed as a set of triplets. 
-        The <i>``Position''</i> part mixed with some negative positions for contrastive loss and the <i>``Exist''</i> part is used for CE loss. 
+        Overview of the knowledge-enhanced disease diagnosis workflow. 
+        The <i>knowledge encoder (left)</i> is first trained to learn a neural representation of the medical knowledge graph via contrastive learning, 
+        and then used to guide the visual representation learning in our <i>knowledge-enhanced classification model (right)</i>.
+        While training the visual encoder, we keep the parameters of the knowledge encoder frozen and propose to learn a set of prompt vectors for efficient adaptation.
+        Finally we adopt a Transformer-based disease-query module for cross-model fusion, which naturally enables explainable diagnosis results via cross attention.
+        
 	</left></p>
         <p><img class="left"  src="./resources/Method.png" width="800px"></p>
       
       <br>
       <hr>
       <center><h2>Quantitative Results</h2></center>
-      <p><b>R1: Zero-shot Classification </b> </p>
+      <p><b>R1: Analysis of Knowledge-Enhanced Classification Model </b> </p>
       <p><left>
-        Comparison with other state-of-the-art methods on zero-shot classification task. AUC, F1 and ACC scores are reported. All diseases mentioned in table are seen during pre-training.
+        <i>Comparison to Conventional Training Scheme.</i> 
+          Compare with Baseline Models with ResNet-50 and ViT-16 as backbone on disease classification tasks. 
+          KE indicates the proposed knowledge encoder, LP indicates the proposed learnable prompt module, and the number denotes the prompt number. 
+          AUC scores averaged across different diseases are reported. 
+          Our knowledge-enhanced model achieves a higher average AUC on all datasets across different architectures.
       </left></p>
       <p><img class="center"  src="./resources/table1.png" width="800px"></p>
       
       <div class="container">
         <div class="image" width="550px">
-          <center><p><img class="center"  src="./resources/table2.png" width="500px"></p></center>
+          <center><p><img class="center"  src="./resources/table4.png" width="500px"></p></center>
 	      </div>
         <div class="text" width="250px"> 
-          <p> Comparison with other state-of-the-art methods on zero-shot unseen disease ``Covid-19'' classification task. 
-            AUC, F1 and ACC scores are reported. 
-            ``Direct covid-19'' refers to directly use ``Covid-19'' to construct the prompt sentence while ``Covid-19 Description'' refers to replace the name ``Covid-19'' with its medical description.
+          <p> Compare with Baseline Models on VinDr-Mammo Task. AUC scores are reported. 
+            Detail results for each diseases are shown in the table to explain that, on VinDr-Mammo, LP sometimes may have a lower scores mainly because of some classes with extremly few cases.
           </p>
         </div>
       </div>
-      <div class="container">
-        <div class="image" width="550px">
-          <center><p><img class="center"  src="./resources/fig3.png" width="500px"></p></center>
-        </div>
-        <div class="text" width="250px"> 
-          <p> The radar figure of our method and other methods of 14 diseases on Chestx-ray14 datasets 
-            AUC scores are reported and, as shown, our method exceeds the previous state-of-the-art on most diseases.
+      <p><b>R2: Analysis of the Knowledge-Enhanced Text Encoder </b> </p>	
+      <p> Ablation study on knowledge encoder with ResNet as a backbone, we use the optimal prompt numbers according to the ablation study, 
+        i.e., 32 for VinDr-PCXR, 128 for VinDr-Mammo, and 64 for VinDr-SpineXr.
+        we can make two observations: <i>(i)</i> guiding visual representation learning with domain knowledge
+        generally works better, e.g., results of using ClinicalBERT or PubMedBERT outperform
+        conventional training with discrete labels, <i>(ii)</i> our proposed knowledge-enhanced text
+        encoder consistently demonstrates superior results, that can be attributed to the explicitly
+        injected domain knowledge, rather than implicitly learning it from the document corpus.
           </p>
-        </div>
-      </div> 
-      <p><b>R2: Zero-shot Grounding </b> </p>	
-      <p> Comparison with other state-of-the-art methods on zero-shot region grounding tasks. 
-        (a) shows the results on RSNA Pneumonia dataset. (b) shows the results on SIIM-ACR Pneumothorax dataset.  
-        The pneumothorax region tends to be thin and narrow and much more challenging for grounding, we thus only consider pointing game, recall and precision. 
-        Our method can achieve better performance on different metrics, especially on Pointing game score. 
-        ``ConVIRT'' as the basic method proposed earliest can not realize this function.
-          </p>
-			<img style="width:800px" src='./resources/table3.png'></img>
+			<img style="width:800px" src='./resources/table2.png'></img>
 			
-      <p> Comparison with other state-of-the-art methods on zero-shot unseen disease Covid-19 grounding task.  
-        ``Direct covid-19'' refers to directly use ``Covid-19'' to construct the prompt sentence while ``Covid-19 Description'' refers to replace the name ``Covid-19`` with its medical description. 
-        Our method can achieve better performance on different metrics.
-          </p>
-      <center><p><img class="center"  src="./resources/table4.png" width="750px"></p></center>
+      
         
-      <p><b>R3: Fine-tuning Classification</b></p>
-      <p> Comparison of AUC scores with other state-of-the-art methods on fine-tuning classification task. 
-        The macro average of AUC scores on 14 diseases are reported for ChestX-ray14 dataset.
+      <p><b>R3: Analysis on the CXR-Mix</b></p>
+      <p> <b>The Ability to Combine Various Partial-labeled Datasets:</b>
+        Compare with Baseline Models on disease classification tasks on the assembling dataset.
+        AvgAUC refers to the AUC score averaged across different diseases. The first line refers to the use
+        of the training flow proposed by TorchXrayVision and use ResNet or ViT as the backbone.
+        Unlike the traditional approach, which requires to carefully merging the label space from different datasets
+        to benefit from them, our formulation of embedding the 'disease name' with a knowledge
+        encoder naturally enables us to train models on the mixture of multiple datasets, 
+        handling different granularities of diagnosis targets and inconsistent pathology expression.
           </p>
-      <center><p><img class="center"  src="./resources/table5.png" width="800px"></p></center>
+      <center><p><img class="center"  src="./resources/table3.png" width="750px"></p></center>
+      <p> <b>The Ability to Leverage Class Diversity:</b> 
+        Analyse the performance gain on the assembling dataset. "Seperation" refers to using a
+        single dataset to train our framework. "+Diversity" refers to adding the cases beyond the target
+        classes, increasing the class diversity, and keeping the data amount of the target classes constant.
+        "+Diversity+Amount" means directly mixing the 11 datasets and for most datasets, the data
+        amount of the target classes will further increase.
+          </p>
+      <center><p><img class="center"  src="./resources/barplot.png" width="800px"></p></center>
       
-      <p> Comparison of Dice scores with other state-of-the-art methods on fine-tuning segmentation tasks. 
-        Three diseases are reported, for each disease, three data portions, 1%, 10%, 100% are adopted to show the performance change.
+      <p> <b>The Ability to Diagnose Open-set Unseen Diseases:</b> 
+        AUC and 95% CI are shown on the unseen classes under the zero-shot setting. n represents
+        the number of related cases. Generally, our method achieves an AUC of at least 0.800 on 14
+        findings, at least 0.700 on 45 findings and at least 0.600 on 79 findings out of 106 radiographic findings where n > 50 in the
+        PadChest test dataset (n = 39, 053).
           </p>
-      <center><p><img class="center"  src="./resources/table6.png" width="800px"></p></center>
+      <center><p><img class="center"  src="./resources/padchest.png" width="800px"></p></center>
 
-      <p><b>R3: Fine-tuning Grading (Fine-grained Classification)</b></p>
-      <p> Comparison with other state-of-the-art methods on fine-tuning edema severity grading muti-class classification task. 
-        AUC score is reported in the Table. 
-        ``0,1,2,3'' in table represents the severity level and final macro average scores are reported.
-          </p>
-      <center><p><img class="center"  src="./resources/table7.png" width="800px"></p></center>
-      
-      <p><b>R4: Ablation Study</b></p>
-      <p> Ablation study on zero-shot classification task. ``PosCL'' refers to the position contrastive loss and ``DE'' refers to the description encoder.AUC, F1 and ACC scores are reported. For ChestX-ray 14, the metrics all refer to the macro average on the 14 diseases.
-          </p>
-      <center><p><img class="center"  src="./resources/table8.png" width="800px"></p></center>
-      <p> Ablation study on zero-shot grounding tasks. (a) shows the results on RSNA Pneumonia dataset. (b) shows the results on SIIM-ACR Pneumothorax dataset.
-          </p>
-      <center><p><img class="center"  src="./resources/table9.png" width="800px"></p></center>
       <br>
       <hr>
 
       <center><h2>Visualizations of Zero-shot Grounding </h2></center>
       <!-- <p><b>2D Visualization </b> </p> -->
       <p><left>
-        The visualization of zero-shot grounding results of our method. Each column represents the results on one disease and the left in it is the ground-truth and right is the heatmap predication of our model. The brighter the red on the figure, the more likely the model considering this region to be associated with abnormalities.
+        We average the cross-attention map in each transformer layer in the disease query module, 
+        and visualize the results in Figure. The model's attention well matches radiologists'
+        diagnoses of different diseases, i.e. red boxes labeled by radiologists.
       </left></p>
-      <p><img class="center"  src="./resources/Visualization.png" width="800px"></p>
+      <p><img class="center"  src="./resources/visualize.png" width="800px"></p>
       <br>
       <hr>
       <center> <h2> Acknowledgements </h2> </center>
