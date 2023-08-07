@@ -1,0 +1,5 @@
+@arxiv{wu2023generalist,
+      title={Towards Generalist Foundation Model for Radiology}, 
+      author={Chaoyi Wu and Xiaoman Zhang and Ya Zhang and Yanfeng Wang and Weidi Xie},
+      year={2023},journal={arXiv preprint arXiv:2308.02463},
+}
