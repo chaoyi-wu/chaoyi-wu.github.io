@@ -7,6 +7,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
   <link rel="stylesheet" type="text/css" href="stylesheet.css">
+  <style>
+        .circle-image {
+            width: 200px; /* 控制图片的宽度 */
+            height: 200px; /* 控制图片的高度，和宽度保持一致 */
+            border-radius: 50%; /* 设置为圆形 */
+            object-fit: cover; /* 确保图片适应圆形 */
+            overflow: hidden; /* 防止溢出 */
+            border: 2px solid #ccc; /* 可选，添加一个边框 */
+        }
+
+        a {
+            display: inline-block; /* 确保链接的大小适应图片 */
+        }
+    </style>
 </head>
 
 <body>
@@ -29,7 +43,7 @@
               </p>
             </td>
             <td style="padding:2.5%;width:40%;max-width:40%">
-              <a href="image/Chaoyi.jpg"><img style="width:100%;max-width:100%" alt="profile photo" src="image/Chaoyi.jpg" class="hoverZoomLink"></a>
+              <a href="image/Chaoyi.jpg"><img class="circle-image" alt="profile photo" src="image/Chaoyi.jpg"></a>
             </td>
           </tr>
          
